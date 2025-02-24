@@ -34,6 +34,18 @@ div[role="option"]:hover {
   background-color: #f3f4f6 !important;
 }
 
+/* Make select trigger visible in dark mode */
+.dark-mode button[data-radix-select-trigger] {
+  color: white !important;
+  background-color: rgba(45, 55, 72, 0.8) !important;
+  border-color: #4a5568 !important;
+}
+
+/* Make select value visible */
+.dark-mode [data-value] {
+  color: white !important;
+}
+
 /* Additional styling for dark mode */
 .dark-mode .bg-gray-100 {
   background-color: #2d3748 !important;
