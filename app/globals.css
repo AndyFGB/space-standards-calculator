@@ -18,31 +18,20 @@ body {
   color: white;
 }
 
-/* Fix dropdown background in dark mode */
-.dark-mode div[data-radix-popper-content-wrapper] {
-  background-color: #2d3748 !important;
+/* Force dropdown to be white background with black text regardless of mode */
+div[data-radix-popper-content-wrapper] > div {
+  background-color: white !important;
+  color: black !important;
+  border-color: #e2e8f0 !important;
 }
 
-.dark-mode div[data-radix-popper-content-wrapper] > div {
-  background-color: #2d3748 !important;
-  color: white !important;
-  border-color: #4a5568 !important;
+/* Force dropdown items to be black text */
+div[role="option"] {
+  color: black !important;
 }
 
-/* Fix dropdown items in dark mode */
-.dark-mode div[role="option"] {
-  color: white !important;
-}
-
-.dark-mode div[role="option"]:hover {
-  background-color: #4a5568 !important;
-}
-
-/* Ensure dropdown triggers are visible */
-.dark-mode button[data-radix-select-trigger] {
-  background-color: #2d3748 !important;
-  color: white !important;
-  border-color: #4a5568 !important;
+div[role="option"]:hover {
+  background-color: #f3f4f6 !important;
 }
 
 /* Additional styling for dark mode */
