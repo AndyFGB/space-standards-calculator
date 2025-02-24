@@ -1,11 +1,12 @@
 "use client"
 
-import { ThemeToggle } from './ThemeToggle';
+
 import React, { useState, useMemo } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
 import { Slider } from './ui/slider';
 import { Switch } from './ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import { ThemeToggle } from './ThemeToggle';
 
 const SpaceStandardsCalculator = () => {
   // State management
@@ -106,11 +107,11 @@ const SpaceStandardsCalculator = () => {
   }, [bedrooms, bedSpaces, storeys, percentageModifier, useMetric]);
 
   return (
-    <Card className="w-full max-w-2xl bg-card text-card-foreground">
+    <Card className="w-full max-w-2xl">
       <CardHeader className="flex flex-row items-center justify-between">
-  <CardTitle>UK Nationally Described Space Standards Calculator</CardTitle>
-  <ThemeToggle />
-</CardHeader>
+        <CardTitle>UK Nationally Described Space Standards Calculator</CardTitle>
+        <ThemeToggle /> {/* This should be here */}
+      </CardHeader>
       <CardContent className="space-y-6">
         {/* Number of Bedrooms */}
         <div className="space-y-2">

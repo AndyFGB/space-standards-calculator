@@ -7,9 +7,11 @@ export const ThemeToggle = () => {
 
   useEffect(() => {
     // Check for dark mode preference on initial load
-    const savedTheme = localStorage.getItem('darkMode') === 'true';
-    setDarkMode(savedTheme);
-    document.documentElement.classList.toggle('dark', savedTheme);
+    if (typeof window !== 'undefined') {
+      const savedTheme = localStorage.getItem('darkMode') === 'true';
+      setDarkMode(savedTheme);
+      document.documentElement.classList.toggle('dark', savedTheme);
+    }
   }, []);
 
   const toggleDarkMode = () => {
@@ -22,10 +24,10 @@ export const ThemeToggle = () => {
   return (
     <button
       onClick={toggleDarkMode}
-      className="rounded-full p-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
+      className="px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-600 text-white font-medium"
       aria-label="Toggle dark mode"
     >
-      {darkMode ? 'Light' : 'Dark'}
+      {darkMode ? '☀️ Light' : '🌙 Dark'}
     </button>
   );
 };
