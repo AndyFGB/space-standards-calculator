@@ -7,21 +7,6 @@ import { Switch } from './ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 
 const SpaceStandardsCalculator = () => {
-  // Simple dark mode toggle
-  const [isDark, setIsDark] = useState(false);
-  
-  // Toggle background color
-  const toggleBackground = () => {
-    setIsDark(!isDark);
-    if (!isDark) {
-      document.body.style.backgroundColor = '#1a1a1a';
-      document.body.style.color = 'white';
-    } else {
-      document.body.style.backgroundColor = 'white';
-      document.body.style.color = 'black';
-    }
-  };
-
   // State management
   const [bedrooms, setBedrooms] = useState(1);
   const [bedSpaces, setBedSpaces] = useState(2);
@@ -119,26 +104,8 @@ const SpaceStandardsCalculator = () => {
   }, [bedrooms, bedSpaces, storeys, percentageModifier, useMetric]);
 
   return (
-    <div className="p-4">
-      {/* Simple colored button */}
-      <div className="flex justify-end mb-4">
-        <button 
-          onClick={toggleBackground}
-          style={{
-            padding: '10px 20px',
-            backgroundColor: '#3B82F6',
-            color: 'white',
-            fontWeight: 'bold',
-            borderRadius: '8px',
-            border: 'none',
-            cursor: 'pointer'
-          }}
-        >
-          {isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-        </button>
-      </div>
-      
-      <Card className="w-full max-w-2xl mx-auto">
+    <div className="w-full">
+      <Card className="w-full">
         <CardHeader>
           <CardTitle>UK Nationally Described Space Standards Calculator</CardTitle>
         </CardHeader>
@@ -226,22 +193,22 @@ const SpaceStandardsCalculator = () => {
 
           {/* Results */}
           <div className="mt-6 space-y-4">
-            <div className="p-4 bg-gray-100 rounded-lg" style={{ backgroundColor: isDark ? '#2d3748' : '#f3f4f6' }}>
+            <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
               <h3 className="text-lg font-semibold">Gross Internal Area (GIA):</h3>
               <p className="text-3xl font-bold mt-2">
                 {calculations.totalSpace} {useMetric ? 'm²' : 'ft²'}
               </p>
-              <p className="text-sm mt-1" style={{ color: isDark ? '#a0aec0' : '#718096' }}>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                 Includes built-in storage area
               </p>
             </div>
             
-            <div className="p-4 bg-gray-100 rounded-lg" style={{ backgroundColor: isDark ? '#2d3748' : '#f3f4f6' }}>
+            <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
               <h3 className="text-lg font-semibold">Built-in Storage Requirement:</h3>
               <p className="text-xl font-bold mt-2">
                 {calculations.storageSpace} {useMetric ? 'm²' : 'ft²'}
               </p>
-              <p className="text-sm mt-1" style={{ color: isDark ? '#a0aec0' : '#718096' }}>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                 This area is included within the GIA requirement above
               </p>
             </div>

@@ -23,8 +23,8 @@ export default function Home() {
   };
 
   return (
-    <main className="relative min-h-screen">
-      <div className="flex justify-end p-4 mb-2">
+    <main className="relative min-h-screen flex flex-col items-center">
+      <div className="w-full max-w-2xl p-4 mb-2 flex justify-end">
         <button 
           onClick={toggleDarkMode}
           className="px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-medium shadow-md flex items-center gap-2"
@@ -39,7 +39,7 @@ export default function Home() {
           }
         </button>
       </div>
-      <div className="px-4">
+      <div className="w-full max-w-2xl px-4">
         <SpaceStandardsCalculator />
       </div>
     </main>
