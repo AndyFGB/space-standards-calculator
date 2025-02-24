@@ -15,7 +15,6 @@ const SpaceStandardsCalculator = () => {
 
   // Space standards data (m²)
   const spaceStandards = {
-    // Your existing space standards object
     1: {
       1: { 1: 39 },
       2: { 1: 50, 2: 58 }
@@ -115,7 +114,7 @@ const SpaceStandardsCalculator = () => {
             <label className="text-sm font-medium" htmlFor="bedrooms">Number of Bedrooms</label>
             <select 
               id="bedrooms"
-              className="w-full p-2 rounded-md border border-gray-300 bg-white text-black" 
+              className="w-full p-2 rounded-md border border-gray-300 bg-white text-black text-sm" 
               value={bedrooms}
               onChange={(e) => setBedrooms(parseInt(e.target.value))}
             >
@@ -132,7 +131,7 @@ const SpaceStandardsCalculator = () => {
             <label className="text-sm font-medium" htmlFor="bedSpaces">Number of Bed Spaces</label>
             <select
               id="bedSpaces"
-              className="w-full p-2 rounded-md border border-gray-300 bg-white text-black"
+              className="w-full p-2 rounded-md border border-gray-300 bg-white text-black text-sm"
               value={bedSpaces}
               onChange={(e) => setBedSpaces(parseInt(e.target.value))}
             >
@@ -149,7 +148,7 @@ const SpaceStandardsCalculator = () => {
             <label className="text-sm font-medium" htmlFor="storeys">Number of Storeys</label>
             <select
               id="storeys"
-              className="w-full p-2 rounded-md border border-gray-300 bg-white text-black"
+              className="w-full p-2 rounded-md border border-gray-300 bg-white text-black text-sm"
               value={storeys}
               onChange={(e) => setStoreys(parseInt(e.target.value))}
             >
