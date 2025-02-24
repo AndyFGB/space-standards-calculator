@@ -1,6 +1,16 @@
+"use client"
+
+import React, { useState } from 'react'
 import SpaceStandardsCalculator from '../components/SpaceStandardsCalculator'
 
 export default function Home() {
+  const [darkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    document.body.classList.toggle('dark-mode');
+  };
+
   return (
     <main>
       <div style={{ 
@@ -9,23 +19,20 @@ export default function Home() {
         right: '10px', 
         zIndex: 9999 
       }}>
-        <a 
-          href="#" 
-          onClick={() => {
-            document.body.classList.toggle('dark-mode');
-            return false;
-          }}
+        <button 
+          onClick={toggleDarkMode}
           style={{
             padding: '10px 20px',
             backgroundColor: 'blue',
             color: 'white',
-            textDecoration: 'none',
+            border: 'none',
             borderRadius: '5px',
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            cursor: 'pointer'
           }}
         >
-          Toggle Dark Mode
-        </a>
+          {darkMode ? 'Light Mode' : 'Dark Mode'}
+        </button>
       </div>
       <SpaceStandardsCalculator />
     </main>
