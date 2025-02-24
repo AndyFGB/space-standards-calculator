@@ -1,30 +1,25 @@
 "use client"
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
 import { Slider } from './ui/slider';
 import { Switch } from './ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 
 const SpaceStandardsCalculator = () => {
-  // Theme state
-  const [darkMode, setDarkMode] = useState(false);
+  // Simple dark mode toggle
+  const [isDark, setIsDark] = useState(false);
   
-  // Initialize dark mode from localStorage
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const isDark = localStorage.getItem('darkMode') === 'true';
-      setDarkMode(isDark);
-      document.documentElement.classList.toggle('dark', isDark);
+  // Toggle background color
+  const toggleBackground = () => {
+    setIsDark(!isDark);
+    if (!isDark) {
+      document.body.style.backgroundColor = '#1a1a1a';
+      document.body.style.color = 'white';
+    } else {
+      document.body.style.backgroundColor = 'white';
+      document.body.style.color = 'black';
     }
-  }, []);
-
-  // Toggle dark mode
-  const toggleDarkMode = () => {
-    const newDarkMode = !darkMode;
-    setDarkMode(newDarkMode);
-    document.documentElement.classList.toggle('dark', newDarkMode);
-    localStorage.setItem('darkMode', newDarkMode.toString());
   };
 
   // State management
@@ -124,16 +119,26 @@ const SpaceStandardsCalculator = () => {
   }, [bedrooms, bedSpaces, storeys, percentageModifier, useMetric]);
 
   return (
-    <div className="flex flex-col items-center min-h-screen p-4">
-      {/* Dark Mode Toggle */}
-      <button
-        onClick={toggleDarkMode}
-        className="fixed top-4 right-4 px-3 py-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-lg"
-      >
-        {darkMode ? '☀️ Light' : '🌙 Dark'}
-      </button>
+    <div className="p-4">
+      {/* Simple colored button */}
+      <div className="flex justify-end mb-4">
+        <button 
+          onClick={toggleBackground}
+          style={{
+            padding: '10px 20px',
+            backgroundColor: '#3B82F6',
+            color: 'white',
+            fontWeight: 'bold',
+            borderRadius: '8px',
+            border: 'none',
+            cursor: 'pointer'
+          }}
+        >
+          {isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+        </button>
+      </div>
       
-      <Card className="w-full max-w-2xl mt-12">
+      <Card className="w-full max-w-2xl mx-auto">
         <CardHeader>
           <CardTitle>UK Nationally Described Space Standards Calculator</CardTitle>
         </CardHeader>
@@ -221,22 +226,22 @@ const SpaceStandardsCalculator = () => {
 
           {/* Results */}
           <div className="mt-6 space-y-4">
-            <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+            <div className="p-4 bg-gray-100 rounded-lg" style={{ backgroundColor: isDark ? '#2d3748' : '#f3f4f6' }}>
               <h3 className="text-lg font-semibold">Gross Internal Area (GIA):</h3>
               <p className="text-3xl font-bold mt-2">
                 {calculations.totalSpace} {useMetric ? 'm²' : 'ft²'}
               </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+              <p className="text-sm mt-1" style={{ color: isDark ? '#a0aec0' : '#718096' }}>
                 Includes built-in storage area
               </p>
             </div>
             
-            <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+            <div className="p-4 bg-gray-100 rounded-lg" style={{ backgroundColor: isDark ? '#2d3748' : '#f3f4f6' }}>
               <h3 className="text-lg font-semibold">Built-in Storage Requirement:</h3>
               <p className="text-xl font-bold mt-2">
                 {calculations.storageSpace} {useMetric ? 'm²' : 'ft²'}
               </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+              <p className="text-sm mt-1" style={{ color: isDark ? '#a0aec0' : '#718096' }}>
                 This area is included within the GIA requirement above
               </p>
             </div>
