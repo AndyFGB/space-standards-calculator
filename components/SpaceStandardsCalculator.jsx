@@ -1,9 +1,9 @@
 "use client"
+
 import React, { useState, useMemo } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
 import { Slider } from './ui/slider';
 import { Switch } from './ui/switch';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 
 const SpaceStandardsCalculator = () => {
   // State management
@@ -15,6 +15,7 @@ const SpaceStandardsCalculator = () => {
 
   // Space standards data (m²)
   const spaceStandards = {
+    // Your existing space standards object
     1: {
       1: { 1: 39 },
       2: { 1: 50, 2: 58 }
@@ -103,116 +104,112 @@ const SpaceStandardsCalculator = () => {
   }, [bedrooms, bedSpaces, storeys, percentageModifier, useMetric]);
 
   return (
-    <Card className="w-full max-w-2xl">
-      <CardHeader>
-        <CardTitle>UK Nationally Described Space Standards Calculator</CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-6">
-        {/* Number of Bedrooms */}
-        <div className="space-y-2">
-          <label className="text-sm font-medium">Number of Bedrooms</label>
-          <Select value={bedrooms.toString()} onValueChange={(value) => setBedrooms(parseInt(value))}>
-            <SelectTrigger>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
+    <div className="w-full">
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle>UK Nationally Described Space Standards Calculator</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          {/* Number of Bedrooms */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium" htmlFor="bedrooms">Number of Bedrooms</label>
+            <select 
+              id="bedrooms"
+              className="w-full p-2 rounded-md border border-gray-300 bg-white text-black" 
+              value={bedrooms}
+              onChange={(e) => setBedrooms(parseInt(e.target.value))}
+            >
               {[1, 2, 3, 4, 5, 6].map((num) => (
-                <SelectItem key={num} value={num.toString()}>
+                <option key={num} value={num}>
                   {num} {num === 1 ? 'Bedroom' : 'Bedrooms'}
-                </SelectItem>
+                </option>
               ))}
-            </SelectContent>
-          </Select>
-        </div>
+            </select>
+          </div>
 
-        {/* Number of Bed Spaces */}
-        <div className="space-y-2">
-          <label className="text-sm font-medium">Number of Bed Spaces</label>
-          <Select 
-            value={bedSpaces.toString()} 
-            onValueChange={(value) => setBedSpaces(parseInt(value))}
-          >
-            <SelectTrigger>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
+          {/* Number of Bed Spaces */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium" htmlFor="bedSpaces">Number of Bed Spaces</label>
+            <select
+              id="bedSpaces"
+              className="w-full p-2 rounded-md border border-gray-300 bg-white text-black"
+              value={bedSpaces}
+              onChange={(e) => setBedSpaces(parseInt(e.target.value))}
+            >
               {validBedSpaces.map((num) => (
-                <SelectItem key={num} value={num.toString()}>
+                <option key={num} value={num}>
                   {num} Bed Spaces
-                </SelectItem>
+                </option>
               ))}
-            </SelectContent>
-          </Select>
-        </div>
+            </select>
+          </div>
 
-        {/* Number of Storeys */}
-        <div className="space-y-2">
-          <label className="text-sm font-medium">Number of Storeys</label>
-          <Select 
-            value={storeys.toString()} 
-            onValueChange={(value) => setStoreys(parseInt(value))}
-          >
-            <SelectTrigger>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
+          {/* Number of Storeys */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium" htmlFor="storeys">Number of Storeys</label>
+            <select
+              id="storeys"
+              className="w-full p-2 rounded-md border border-gray-300 bg-white text-black"
+              value={storeys}
+              onChange={(e) => setStoreys(parseInt(e.target.value))}
+            >
               {validStoreys.map((num) => (
-                <SelectItem key={num} value={num.toString()}>
+                <option key={num} value={num}>
                   {num} {num === 1 ? 'Storey' : 'Storeys'}
-                </SelectItem>
+                </option>
               ))}
-            </SelectContent>
-          </Select>
-        </div>
-
-        {/* Size Adjustment Slider */}
-        <div className="space-y-2">
-          <label className="text-sm font-medium">Size Adjustment: {percentageModifier}%</label>
-          <Slider
-            min={85}
-            max={115}
-            step={5}
-            value={[percentageModifier]}
-            onValueChange={(value) => setPercentageModifier(value[0])}
-            className="w-full"
-          />
-        </div>
-
-        {/* Unit Toggle */}
-        <div className="flex items-center space-x-2">
-          <Switch
-            checked={useMetric}
-            onCheckedChange={setUseMetric}
-          />
-          <label className="text-sm font-medium">
-            {useMetric ? 'Square Meters (m²)' : 'Square Feet (ft²)'}
-          </label>
-        </div>
-
-        {/* Results */}
-        <div className="mt-6 space-y-4">
-          <div className="p-4 bg-gray-100 rounded-lg">
-            <h3 className="text-lg font-semibold">Gross Internal Area (GIA):</h3>
-            <p className="text-3xl font-bold mt-2">
-              {calculations.totalSpace} {useMetric ? 'm²' : 'ft²'}
-            </p>
-            <p className="text-sm text-gray-600 mt-1">
-              Includes built-in storage area
-            </p>
+            </select>
           </div>
-          
-          <div className="p-4 bg-gray-100 rounded-lg">
-            <h3 className="text-lg font-semibold">Built-in Storage Requirement:</h3>
-            <p className="text-xl font-bold mt-2">
-              {calculations.storageSpace} {useMetric ? 'm²' : 'ft²'}
-            </p>
-            <p className="text-sm text-gray-600 mt-1">
-              This area is included within the GIA requirement above
-            </p>
+
+          {/* Size Adjustment Slider */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Size Adjustment: {percentageModifier}%</label>
+            <Slider
+              min={85}
+              max={115}
+              step={5}
+              value={[percentageModifier]}
+              onValueChange={(value) => setPercentageModifier(value[0])}
+              className="w-full"
+            />
           </div>
-        </div>
-      </CardContent>
-    </Card>
+
+          {/* Unit Toggle */}
+          <div className="flex items-center space-x-2">
+            <Switch
+              checked={useMetric}
+              onCheckedChange={setUseMetric}
+            />
+            <label className="text-sm font-medium">
+              {useMetric ? 'Square Meters (m²)' : 'Square Feet (ft²)'}
+            </label>
+          </div>
+
+          {/* Results */}
+          <div className="mt-6 space-y-4">
+            <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+              <h3 className="text-lg font-semibold">Gross Internal Area (GIA):</h3>
+              <p className="text-3xl font-bold mt-2">
+                {calculations.totalSpace} {useMetric ? 'm²' : 'ft²'}
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                Includes built-in storage area
+              </p>
+            </div>
+            
+            <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+              <h3 className="text-lg font-semibold">Built-in Storage Requirement:</h3>
+              <p className="text-xl font-bold mt-2">
+                {calculations.storageSpace} {useMetric ? 'm²' : 'ft²'}
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                This area is included within the GIA requirement above
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 
