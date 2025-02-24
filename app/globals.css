@@ -7,12 +7,22 @@
   --foreground: 0, 0, 0;
 }
 
-.dark {
-  --background: 15, 23, 42;
-  --foreground: 255, 255, 255;
-}
-
 body {
   background-color: rgb(var(--background));
   color: rgb(var(--foreground));
+}
+
+/* Simple dark mode toggle class */
+.dark-mode {
+  background-color: #121212;
+  color: white;
+}
+
+/* Additional styling for dark mode */
+.dark-mode .bg-gray-100 {
+  background-color: #2d3748;
+}
+
+.dark-mode .text-gray-600 {
+  color: #a0aec0;
 }
