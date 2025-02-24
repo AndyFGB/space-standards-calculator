@@ -6,28 +6,32 @@ export const ThemeToggle = () => {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    // Check for dark mode preference on initial load
+    // Run only on client side
     if (typeof window !== 'undefined') {
-      const savedTheme = localStorage.getItem('darkMode') === 'true';
-      setDarkMode(savedTheme);
-      document.documentElement.classList.toggle('dark', savedTheme);
+      const isDark = document.documentElement.classList.contains('dark');
+      setDarkMode(isDark);
     }
   }, []);
 
   const toggleDarkMode = () => {
     const newDarkMode = !darkMode;
     setDarkMode(newDarkMode);
-    document.documentElement.classList.toggle('dark', newDarkMode);
-    localStorage.setItem('darkMode', newDarkMode.toString());
+    
+    if (newDarkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('darkMode', 'true');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('darkMode', 'false');
+    }
   };
 
   return (
     <button
       onClick={toggleDarkMode}
-      className="px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-600 text-white font-medium"
-      aria-label="Toggle dark mode"
+      className="px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-lg"
     >
-      {darkMode ? '☀️ Light' : '🌙 Dark'}
+      {darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
     </button>
   );
 };

@@ -107,12 +107,17 @@ const SpaceStandardsCalculator = () => {
   }, [bedrooms, bedSpaces, storeys, percentageModifier, useMetric]);
 
   return (
-    <Card className="w-full max-w-2xl">
-      <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle>UK Nationally Described Space Standards Calculator</CardTitle>
-        <ThemeToggle /> {/* This should be here */}
-      </CardHeader>
-      <CardContent className="space-y-6">
+    <>
+      {/* Add the theme toggle outside the card as a floating button */}
+      <div className="fixed top-4 right-4 z-50">
+        <ThemeToggle />
+      </div>
+      
+      <Card className="w-full max-w-2xl">
+        <CardHeader>
+          <CardTitle>UK Nationally Described Space Standards Calculator</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
         {/* Number of Bedrooms */}
         <div className="space-y-2">
           <label className="text-sm font-medium">Number of Bedrooms</label>
@@ -215,8 +220,9 @@ const SpaceStandardsCalculator = () => {
   </p>
 </div>
         </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </>
   );
 };
 
