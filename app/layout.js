@@ -6,7 +6,6 @@ export default function RootLayout({ children }) {
       <head>
         <script dangerouslySetInnerHTML={{
           __html: `
-            // Check if dark mode was previously enabled
             if (localStorage.getItem('darkMode') === 'true') {
               document.documentElement.classList.add('dark');
             }
