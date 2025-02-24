@@ -5,7 +5,6 @@ import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
 import { Slider } from './ui/slider';
 import { Switch } from './ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
-import { ThemeToggle } from './ThemeToggle';
 
 const SpaceStandardsCalculator = () => {
   // State management
@@ -14,6 +13,7 @@ const SpaceStandardsCalculator = () => {
   const [storeys, setStoreys] = useState(1);
   const [percentageModifier, setPercentageModifier] = useState(100);
   const [useMetric, setUseMetric] = useState(true);
+
 
   // Space standards data (m²)
   const spaceStandards = {
