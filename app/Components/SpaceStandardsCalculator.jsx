@@ -114,12 +114,12 @@ const SpaceStandardsCalculator = () => {
           <div className="space-y-2">
             <label className="text-sm font-medium">Number of Bedrooms</label>
             <Select value={bedrooms.toString()} onValueChange={(value) => setBedrooms(parseInt(value))}>
-              <SelectTrigger>
+              <SelectTrigger style={{ color: 'inherit', backgroundColor: 'inherit' }}>
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent style={{ backgroundColor: 'white', color: 'black' }}>
                 {[1, 2, 3, 4, 5, 6].map((num) => (
-                  <SelectItem key={num} value={num.toString()}>
+                  <SelectItem key={num} value={num.toString()} style={{ color: 'black' }}>
                     {num} {num === 1 ? 'Bedroom' : 'Bedrooms'}
                   </SelectItem>
                 ))}
@@ -134,12 +134,12 @@ const SpaceStandardsCalculator = () => {
               value={bedSpaces.toString()} 
               onValueChange={(value) => setBedSpaces(parseInt(value))}
             >
-              <SelectTrigger>
+              <SelectTrigger style={{ color: 'inherit', backgroundColor: 'inherit' }}>
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent style={{ backgroundColor: 'white', color: 'black' }}>
                 {validBedSpaces.map((num) => (
-                  <SelectItem key={num} value={num.toString()}>
+                  <SelectItem key={num} value={num.toString()} style={{ color: 'black' }}>
                     {num} Bed Spaces
                   </SelectItem>
                 ))}
@@ -154,12 +154,12 @@ const SpaceStandardsCalculator = () => {
               value={storeys.toString()} 
               onValueChange={(value) => setStoreys(parseInt(value))}
             >
-              <SelectTrigger>
+              <SelectTrigger style={{ color: 'inherit', backgroundColor: 'inherit' }}>
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent style={{ backgroundColor: 'white', color: 'black' }}>
                 {validStoreys.map((num) => (
-                  <SelectItem key={num} value={num.toString()}>
+                  <SelectItem key={num} value={num.toString()} style={{ color: 'black' }}>
                     {num} {num === 1 ? 'Storey' : 'Storeys'}
                   </SelectItem>
                 ))}
