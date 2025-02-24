@@ -1,5 +1,6 @@
 "use client"
 
+import { ThemeToggle } from './ThemeToggle';
 import React, { useState, useMemo } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
 import { Slider } from './ui/slider';
@@ -107,9 +108,9 @@ const SpaceStandardsCalculator = () => {
   return (
     <Card className="w-full max-w-2xl bg-card text-card-foreground">
       <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle>UK Nationally Described Space Standards Calculator</CardTitle>
-        <ThemeToggle />
-      </CardHeader>
+  <CardTitle>UK Nationally Described Space Standards Calculator</CardTitle>
+  <ThemeToggle />
+</CardHeader>
       <CardContent className="space-y-6">
         {/* Number of Bedrooms */}
         <div className="space-y-2">
@@ -193,26 +194,25 @@ const SpaceStandardsCalculator = () => {
         </div>
 
         {/* Results */}
-        <div className="mt-6 space-y-4">
-          <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-            <h3 className="text-lg font-semibold">Gross Internal Area (GIA):</h3>
-            <p className="text-3xl font-bold mt-2">
-              {calculations.totalSpace} {useMetric ? 'm²' : 'ft²'}
-            </p>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-              Includes built-in storage area
-            </p>
-          </div>
-          
-          <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-            <h3 className="text-lg font-semibold">Built-in Storage Requirement:</h3>
-            <p className="text-xl font-bold mt-2">
-              {calculations.storageSpace} {useMetric ? 'm²' : 'ft²'}
-            </p>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-              This area is included within the GIA requirement above
-            </p>
-          </div>
+        <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+        <h3 className="text-lg font-semibold">Gross Internal Area (GIA):</h3>
+        <p className="text-3xl font-bold mt-2">
+          {calculations.totalSpace} {useMetric ? 'm²' : 'ft²'}
+        </p>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+        Includes built-in storage area
+          </p>
+        </div>
+
+<div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+  <h3 className="text-lg font-semibold">Built-in Storage Requirement:</h3>
+  <p className="text-xl font-bold mt-2">
+    {calculations.storageSpace} {useMetric ? 'm²' : 'ft²'}
+  </p>
+  <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+    This area is included within the GIA requirement above
+  </p>
+</div>
         </div>
       </CardContent>
     </Card>

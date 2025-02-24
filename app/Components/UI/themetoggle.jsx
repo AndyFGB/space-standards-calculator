@@ -1,18 +1,31 @@
 "use client"
 
-import React from 'react'
-import { useTheme } from './ThemeProvider'
+import React, { useEffect, useState } from 'react';
 
 export const ThemeToggle = () => {
-  const { theme, toggleTheme } = useTheme()
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    // Check for dark mode preference on initial load
+    const savedTheme = localStorage.getItem('darkMode') === 'true';
+    setDarkMode(savedTheme);
+    document.documentElement.classList.toggle('dark', savedTheme);
+  }, []);
+
+  const toggleDarkMode = () => {
+    const newDarkMode = !darkMode;
+    setDarkMode(newDarkMode);
+    document.documentElement.classList.toggle('dark', newDarkMode);
+    localStorage.setItem('darkMode', newDarkMode.toString());
+  };
 
   return (
     <button
-      onClick={toggleTheme}
+      onClick={toggleDarkMode}
       className="rounded-full p-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
-      aria-label="Toggle theme"
+      aria-label="Toggle dark mode"
     >
-      {theme === 'light' ? 'Dark' : 'Light'}
+      {darkMode ? 'Light' : 'Dark'}
     </button>
-  )
-}
+  );
+};
