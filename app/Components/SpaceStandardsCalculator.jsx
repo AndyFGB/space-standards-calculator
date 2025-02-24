@@ -1,21 +1,38 @@
 "use client"
 
-
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
 import { Slider } from './ui/slider';
 import { Switch } from './ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
-import { ThemeToggle } from './ThemeToggle';
 
 const SpaceStandardsCalculator = () => {
+  // Theme state
+  const [darkMode, setDarkMode] = useState(false);
+  
+  // Initialize dark mode from localStorage
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const isDark = localStorage.getItem('darkMode') === 'true';
+      setDarkMode(isDark);
+      document.documentElement.classList.toggle('dark', isDark);
+    }
+  }, []);
+
+  // Toggle dark mode
+  const toggleDarkMode = () => {
+    const newDarkMode = !darkMode;
+    setDarkMode(newDarkMode);
+    document.documentElement.classList.toggle('dark', newDarkMode);
+    localStorage.setItem('darkMode', newDarkMode.toString());
+  };
+
   // State management
   const [bedrooms, setBedrooms] = useState(1);
   const [bedSpaces, setBedSpaces] = useState(2);
   const [storeys, setStoreys] = useState(1);
   const [percentageModifier, setPercentageModifier] = useState(100);
   const [useMetric, setUseMetric] = useState(true);
-
 
   // Space standards data (m²)
   const spaceStandards = {
@@ -107,122 +124,126 @@ const SpaceStandardsCalculator = () => {
   }, [bedrooms, bedSpaces, storeys, percentageModifier, useMetric]);
 
   return (
-    <>
-      {/* Add the theme toggle outside the card as a floating button */}
-      <div className="fixed top-4 right-4 z-50">
-        <ThemeToggle />
-      </div>
+    <div className="flex flex-col items-center min-h-screen p-4">
+      {/* Dark Mode Toggle */}
+      <button
+        onClick={toggleDarkMode}
+        className="fixed top-4 right-4 px-3 py-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-lg"
+      >
+        {darkMode ? '☀️ Light' : '🌙 Dark'}
+      </button>
       
-      <Card className="w-full max-w-2xl">
+      <Card className="w-full max-w-2xl mt-12">
         <CardHeader>
           <CardTitle>UK Nationally Described Space Standards Calculator</CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
-        {/* Number of Bedrooms */}
-        <div className="space-y-2">
-          <label className="text-sm font-medium">Number of Bedrooms</label>
-          <Select value={bedrooms.toString()} onValueChange={(value) => setBedrooms(parseInt(value))}>
-            <SelectTrigger>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {[1, 2, 3, 4, 5, 6].map((num) => (
-                <SelectItem key={num} value={num.toString()}>
-                  {num} {num === 1 ? 'Bedroom' : 'Bedrooms'}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+          {/* Number of Bedrooms */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Number of Bedrooms</label>
+            <Select value={bedrooms.toString()} onValueChange={(value) => setBedrooms(parseInt(value))}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {[1, 2, 3, 4, 5, 6].map((num) => (
+                  <SelectItem key={num} value={num.toString()}>
+                    {num} {num === 1 ? 'Bedroom' : 'Bedrooms'}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
 
-        {/* Number of Bed Spaces */}
-        <div className="space-y-2">
-          <label className="text-sm font-medium">Number of Bed Spaces</label>
-          <Select 
-            value={bedSpaces.toString()} 
-            onValueChange={(value) => setBedSpaces(parseInt(value))}
-          >
-            <SelectTrigger>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {validBedSpaces.map((num) => (
-                <SelectItem key={num} value={num.toString()}>
-                  {num} Bed Spaces
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+          {/* Number of Bed Spaces */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Number of Bed Spaces</label>
+            <Select 
+              value={bedSpaces.toString()} 
+              onValueChange={(value) => setBedSpaces(parseInt(value))}
+            >
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {validBedSpaces.map((num) => (
+                  <SelectItem key={num} value={num.toString()}>
+                    {num} Bed Spaces
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
 
-        {/* Number of Storeys */}
-        <div className="space-y-2">
-          <label className="text-sm font-medium">Number of Storeys</label>
-          <Select 
-            value={storeys.toString()} 
-            onValueChange={(value) => setStoreys(parseInt(value))}
-          >
-            <SelectTrigger>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {validStoreys.map((num) => (
-                <SelectItem key={num} value={num.toString()}>
-                  {num} {num === 1 ? 'Storey' : 'Storeys'}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+          {/* Number of Storeys */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Number of Storeys</label>
+            <Select 
+              value={storeys.toString()} 
+              onValueChange={(value) => setStoreys(parseInt(value))}
+            >
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {validStoreys.map((num) => (
+                  <SelectItem key={num} value={num.toString()}>
+                    {num} {num === 1 ? 'Storey' : 'Storeys'}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
 
-        {/* Size Adjustment Slider */}
-        <div className="space-y-2">
-          <label className="text-sm font-medium">Size Adjustment: {percentageModifier}%</label>
-          <Slider
-            min={85}
-            max={115}
-            step={5}
-            value={[percentageModifier]}
-            onValueChange={(value) => setPercentageModifier(value[0])}
-            className="w-full"
-          />
-        </div>
+          {/* Size Adjustment Slider */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Size Adjustment: {percentageModifier}%</label>
+            <Slider
+              min={85}
+              max={115}
+              step={5}
+              value={[percentageModifier]}
+              onValueChange={(value) => setPercentageModifier(value[0])}
+              className="w-full"
+            />
+          </div>
 
-        {/* Unit Toggle */}
-        <div className="flex items-center space-x-2">
-          <Switch
-            checked={useMetric}
-            onCheckedChange={setUseMetric}
-          />
-          <label className="text-sm font-medium">
-            {useMetric ? 'Square Meters (m²)' : 'Square Feet (ft²)'}
-          </label>
-        </div>
+          {/* Unit Toggle */}
+          <div className="flex items-center space-x-2">
+            <Switch
+              checked={useMetric}
+              onCheckedChange={setUseMetric}
+            />
+            <label className="text-sm font-medium">
+              {useMetric ? 'Square Meters (m²)' : 'Square Feet (ft²)'}
+            </label>
+          </div>
 
-        {/* Results */}
-        <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-        <h3 className="text-lg font-semibold">Gross Internal Area (GIA):</h3>
-        <p className="text-3xl font-bold mt-2">
-          {calculations.totalSpace} {useMetric ? 'm²' : 'ft²'}
-        </p>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-        Includes built-in storage area
-          </p>
-        </div>
-
-<div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-  <h3 className="text-lg font-semibold">Built-in Storage Requirement:</h3>
-  <p className="text-xl font-bold mt-2">
-    {calculations.storageSpace} {useMetric ? 'm²' : 'ft²'}
-  </p>
-  <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-    This area is included within the GIA requirement above
-  </p>
-</div>
-        </div>
+          {/* Results */}
+          <div className="mt-6 space-y-4">
+            <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+              <h3 className="text-lg font-semibold">Gross Internal Area (GIA):</h3>
+              <p className="text-3xl font-bold mt-2">
+                {calculations.totalSpace} {useMetric ? 'm²' : 'ft²'}
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                Includes built-in storage area
+              </p>
+            </div>
+            
+            <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+              <h3 className="text-lg font-semibold">Built-in Storage Requirement:</h3>
+              <p className="text-xl font-bold mt-2">
+                {calculations.storageSpace} {useMetric ? 'm²' : 'ft²'}
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                This area is included within the GIA requirement above
+              </p>
+            </div>
+          </div>
         </CardContent>
       </Card>
-    </>
+    </div>
   );
 };
 
