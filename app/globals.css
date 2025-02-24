@@ -18,34 +18,6 @@ body {
   color: white;
 }
 
-/* Force dropdown to be white background with black text regardless of mode */
-div[data-radix-popper-content-wrapper] > div {
-  background-color: white !important;
-  color: black !important;
-  border-color: #e2e8f0 !important;
-}
-
-/* Force dropdown items to be black text */
-div[role="option"] {
-  color: black !important;
-}
-
-div[role="option"]:hover {
-  background-color: #f3f4f6 !important;
-}
-
-/* Make select trigger visible in dark mode */
-.dark-mode button[data-radix-select-trigger] {
-  color: white !important;
-  background-color: rgba(45, 55, 72, 0.8) !important;
-  border-color: #4a5568 !important;
-}
-
-/* Make select value visible */
-.dark-mode [data-value] {
-  color: white !important;
-}
-
 /* Additional styling for dark mode */
 .dark-mode .bg-gray-100 {
   background-color: #2d3748 !important;
@@ -53,4 +25,19 @@ div[role="option"]:hover {
 
 .dark-mode .text-gray-600 {
   color: #a0aec0 !important;
+}
+
+/* Force dropdowns to be visible in dark mode */
+.dark-mode [data-radix-select-trigger] {
+  background-color: #2d3748 !important;
+  border: 1px solid #4a5568 !important;
+}
+
+.dark-mode [data-radix-select-content] {
+  background-color: white !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+.dark-mode [data-radix-select-item] {
+  color: black !important;
 }
