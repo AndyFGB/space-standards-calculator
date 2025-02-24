@@ -18,22 +18,28 @@ body {
   color: white;
 }
 
-/* Fix dropdown text visibility in dark mode */
-.dark-mode [data-radix-select-content] {
+/* Fix dropdown background in dark mode */
+.dark-mode div[data-radix-popper-content-wrapper] {
+  background-color: #2d3748 !important;
+}
+
+.dark-mode div[data-radix-popper-content-wrapper] > div {
   background-color: #2d3748 !important;
   color: white !important;
+  border-color: #4a5568 !important;
 }
 
-.dark-mode [data-radix-select-item] {
+/* Fix dropdown items in dark mode */
+.dark-mode div[role="option"] {
   color: white !important;
 }
 
-.dark-mode [data-radix-select-item]:hover {
+.dark-mode div[role="option"]:hover {
   background-color: #4a5568 !important;
 }
 
 /* Ensure dropdown triggers are visible */
-.dark-mode [data-radix-select-trigger] {
+.dark-mode button[data-radix-select-trigger] {
   background-color: #2d3748 !important;
   color: white !important;
   border-color: #4a5568 !important;
